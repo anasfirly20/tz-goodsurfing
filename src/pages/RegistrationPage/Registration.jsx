@@ -13,16 +13,25 @@ import { useQuery, useMutation } from "react-query";
 
 // Api
 import { getAllUsers, deleteUser } from "../../api/routes/Users";
-import { useEffect } from "react";
 
 export default function Home() {
   const [inputData, setInputData] = useState("");
   const { data } = useQuery(["usersData"], () => getAllUsers());
   const [selectedUser, setSelectedUser] = useState(null);
   const [list, setList] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   const handleChange = (e) => {
-    setInputData(e.target.value);
+    const searchTerm = e.target.value;
+    setInputData(searchTerm);
+
+    // Filter users based on the search input
+    const filtered = data.filter(
+      (user) =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filtered);
   };
 
   const handleAddList = (newData) => {
@@ -49,10 +58,6 @@ export default function Home() {
     },
   });
 
-  useEffect(() => {
-    console.log(">>>", list);
-  }, [list]);
-
   return (
     <section className="pl-[21vw] pt-longer pb-shorter3 pr-shorter space-y-10 min-h-screen">
       <h1 className="text-primary text-2xl">Команда организации</h1>
@@ -63,13 +68,28 @@ export default function Home() {
       </p>
       <form className="grid gap-1">
         <label className="text-secondary">Введите e-mail участника</label>
-        <div className="flex items-center justify-between">
-          <input
-            type="text"
-            className="border-2 border-custom-gray-2 w-[77%] bg-white p-3 rounded-lg outline-none"
-            value={inputData}
-            onChange={handleChange}
-          />
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col relative w-[77%]">
+            <input
+              type="text"
+              className="border-2 border-custom-gray-2 w-full bg-white p-3 rounded-lg outline-none"
+              value={inputData}
+              onChange={handleChange}
+            />
+            {inputData && filteredUsers.length > 0 && (
+              <ul className="absolute z-10 bg-white top-14 divide-y divide-custom-gray-2">
+                {filteredUsers.map((user, index) => (
+                  <li
+                    key={index}
+                    className="flex flex-col p-3 pr-20 hover:bg-custom-gray hover:cursor-pointer"
+                  >
+                    <p className="text-primary text-lg">{user.name}</p>
+                    <p className="text-secondary text-sm">{user.email}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           <button
             type="button"
             className={`flex justify-center items-center gap-2 p-3 border-2 rounded-lg w-[20%] animate ${
@@ -87,7 +107,7 @@ export default function Home() {
           </button>
         </div>
       </form>
-      <section className="grid grid-cols-3 gap-12">
+      <section className="grid grid-cols-3 gap-x-12 gap-y-6">
         {data?.map((user, index) => (
           <CardLong
             key={index}
