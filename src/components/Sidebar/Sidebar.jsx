@@ -44,15 +44,14 @@ export default function Sidebar() {
                   <p className="text-lg">{item.label}</p>
                 </button>
                 {selected && (
-                  <section className="border-l border-custom-gray-2 ml-5">
+                  <section className="border-l border-custom-gray-2 ml-6 grid">
                     {item.subItems.map((subItem, index) => {
                       return (
-                        <p
-                          key={index}
-                          className="text-lg text-custom-gray-2 pl-5"
-                        >
-                          {subItem}
-                        </p>
+                        <button key={index}>
+                          <p className="text-lg text-custom-gray-2 pl-5 text-start">
+                            {subItem}
+                          </p>
+                        </button>
                       );
                     })}
                   </section>
