@@ -8,6 +8,7 @@ export default {
         "custom-gray-2": "#8696a3",
         "custom-black": "#0E1D27",
         "custom-light-blue": "#3dabf7",
+        primary: "#212121",
       },
       padding: {
         shorter4: "1vw",
