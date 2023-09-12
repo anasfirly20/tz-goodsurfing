@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 // Miscellaneous
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { RingLoader } from "react-spinners";
+import { Toaster } from "react-hot-toast";
 
 //
 import Navbar from "./components/Navbar/Navbar";
@@ -16,6 +17,11 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Toaster
+          toastOptions={{
+            duration: 2000,
+          }}
+        />
         <Navbar />
         <Suspense
           fallback={
