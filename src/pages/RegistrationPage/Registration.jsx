@@ -5,7 +5,19 @@ import { Icon } from "@iconify/react";
 import CustomButton from "../../components/CustomButton";
 import CardLong from "../../components/CardLong";
 
+// React query
+import { useQuery } from "react-query";
+
+// Api
+import { getAllUsers } from "../../api/routes/Users";
+
 export default function Home() {
+  const { isLoading, error, data } = useQuery(["usersData"], () =>
+    getAllUsers()
+  );
+
+  console.log(">>>", data);
+
   return (
     <section className="pl-[21vw] pt-longer pr-shorter space-y-10 min-h-screen">
       <h1 className="text-primary text-2xl">Команда организации</h1>
