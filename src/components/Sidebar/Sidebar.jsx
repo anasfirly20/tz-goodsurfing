@@ -61,7 +61,7 @@ export default function Sidebar() {
                           }}
                         >
                           <p
-                            className={`pl-5 text-lg text-start ${
+                            className={`pl-5 text-lg text-start animate ${
                               selected ? "text-primary" : "text-custom-gray-2"
                             }`}
                           >
