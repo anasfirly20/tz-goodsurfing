@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // Miscellaneous
 import { Icon } from "@iconify/react";
 
@@ -16,10 +18,10 @@ export default function Home() {
     getAllUsers()
   );
 
-  console.log(">>>", data);
+  const [inputData, setInputData] = useState("");
 
   return (
-    <section className="pl-[21vw] pt-longer pr-shorter space-y-10 min-h-screen">
+    <section className="pl-[21vw] pt-longer pb-shorter3 pr-shorter space-y-10 min-h-screen">
       <h1 className="text-primary text-2xl">Команда организации</h1>
       <p className="text-primary text-base">
         Владельцы команд могут добавлять участников в команду своей организации,
@@ -32,12 +34,13 @@ export default function Home() {
           <input
             type="text"
             className="border-2 border-custom-gray-2 w-[77%] bg-white p-3 rounded-lg outline-none"
+            value={inputData}
           />
           <button
             type="button"
             className="bg-custom-light-blue text-white flex justify-center items-center gap-2 p-3 border-2 border-custom-light-blue rounded-lg w-[20%]"
             onClick={() => {
-              // dispatch(setSelectedSidebar(3000));
+              // console.log("EMAIL>>", data?.email);
             }}
           >
             <Icon icon="fluent:add-24-regular" fontSize={25} />
@@ -46,16 +49,19 @@ export default function Home() {
         </div>
       </form>
       <section className="grid grid-cols-3 gap-12">
-        {Array(3)
-          .fill(3)
-          .map((_, index) => (
-            <CardLong
-              key={index}
-              role="Организатор"
-              name="Владислав Краснопольский"
-              location="Владивосток, Россия"
-            />
-          ))}
+        {data?.map((user, index) => (
+          <CardLong
+            key={index}
+            role="Организатор"
+            name={user?.name}
+            street={user?.address?.street}
+            city={user?.address?.city}
+            onClick={() => {
+              setInputData(user?.email);
+              console.log(user?.email);
+            }}
+          />
+        ))}
       </section>
       <section className="pt-10">
         <CustomButton
