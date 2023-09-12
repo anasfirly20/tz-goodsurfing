@@ -5,7 +5,19 @@ import { Icon } from "@iconify/react";
 import CustomButton from "../../components/CustomButton";
 import CardLong from "../../components/CardLong";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedSidebar } from "../../store/SidebarSlice";
+import { useEffect } from "react";
+
 export default function Home() {
+  const dispatch = useDispatch();
+
+  const selectedSidebar = useSelector((state) => state.sidebar.selectedSidebar);
+
+  useEffect(() => {
+    console.log("component>", selectedSidebar);
+  }, [selectedSidebar]);
+
   return (
     <section className="pl-[21vw] pt-longer pr-shorter space-y-10 min-h-screen">
       <h1 className="text-primary text-2xl">Команда организации</h1>
@@ -24,6 +36,9 @@ export default function Home() {
           <button
             type="button"
             className="bg-custom-light-blue text-white flex justify-center items-center gap-2 p-3 border-2 border-custom-light-blue rounded-lg w-[20%]"
+            onClick={() => {
+              dispatch(setSelectedSidebar(3000));
+            }}
           >
             <Icon icon="fluent:add-24-regular" fontSize={25} />
             Добавить участника

@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const sidebarSlice = createSlice({
-  name: "selectedSidebar",
+  name: "sidebar",
   initialState: {
-    selected: 0,
+    selectedSidebar: 2,
   },
   reducers: {
-    setSelected(state, action) {
-      state.selected = action.payload;
+    setSelectedSidebar(state, action) {
+      state.selectedSidebar = action.payload;
     },
   },
 });
 
-export const { setSelected } = sidebarSlice.actions;
+export const { setSelectedSidebar } = sidebarSlice.actions;
 export default sidebarSlice.reducer;
