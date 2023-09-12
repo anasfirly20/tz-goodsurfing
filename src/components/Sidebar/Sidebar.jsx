@@ -32,9 +32,7 @@ export default function Sidebar() {
             </button>
           ))}
         </section>
-        <div className="">
-          <CardSupport />
-        </div>
+        <CardSupport />
       </section>
     </nav>
   );
