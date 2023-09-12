@@ -110,6 +110,10 @@ export default function Home() {
         <CustomButton
           label="Сохранить"
           className="bg-custom-light-blue text-white py-3 px-28"
+          onClick={() => {
+            console.log("Saved List -->", list);
+            toast.success("Check your browser's console to check the list 🙂");
+          }}
         />
       </section>
     </section>
