@@ -20,18 +20,23 @@ export default function Home() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [list, setList] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [emailNotFound, setEmailNotFound] = useState(false);
 
   const handleChange = (e) => {
     const searchTerm = e.target.value;
     setInputData(searchTerm);
 
-    // Filter users based on the search input
     const filtered = data.filter(
       (user) =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredUsers(filtered);
+
+    const isEmailNotFound = !filtered.some((user) =>
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setEmailNotFound(isEmailNotFound);
   };
 
   const handleAddList = (newData) => {
@@ -67,21 +72,30 @@ export default function Home() {
         <br /> У них должна быть учетная запись на сайте.
       </p>
       <form className="grid gap-1">
-        <label className="text-secondary">Введите e-mail участника</label>
+        <label className="ml-1 text-secondary">Введите e-mail участника</label>
         <div className="flex justify-between items-center">
           <div className="flex flex-col relative w-[77%]">
             <input
-              type="text"
-              className="border-2 border-custom-gray-2 w-full bg-white p-3 rounded-lg outline-none"
+              type="email"
+              placeholder="Search by email"
+              className={`border-2 border-custom-gray-2 w-full bg-white p-3 rounded-lg outline-none ${
+                emailNotFound && "border-red-500"
+              }`}
               value={inputData}
               onChange={handleChange}
             />
+            {emailNotFound && (
+              <p className="text-sm text-red-500 mt-1 ml-1">*Email not found</p>
+            )}
             {inputData && filteredUsers.length > 0 && (
               <ul className="absolute z-10 bg-white top-14 divide-y divide-custom-gray-2">
                 {filteredUsers.map((user, index) => (
                   <li
                     key={index}
                     className="flex flex-col p-3 pr-20 hover:bg-custom-gray hover:cursor-pointer"
+                    onClick={() => {
+                      setInputData(user.email);
+                    }}
                   >
                     <p className="text-primary text-lg">{user.name}</p>
                     <p className="text-secondary text-sm">{user.email}</p>
