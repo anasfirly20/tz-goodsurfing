@@ -4,6 +4,9 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { RingLoader } from "react-spinners";
 
+//
+import Navbar from "./components/Navbar/Navbar";
+
 // Pages
 const Homepage = lazy(() => import("./pages/Homepage/Home"));
 const Aboutpage = lazy(() => import("./pages/Aboutpage/About"));
@@ -12,6 +15,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Navbar />
         <Suspense
           fallback={
             <section className="flex flex-col items-center justify-center min-h-screen">
