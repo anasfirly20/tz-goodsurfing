@@ -21,6 +21,7 @@ export default function Home() {
   const [list, setList] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [emailNotFound, setEmailNotFound] = useState(false);
+  const [showList, setShowList] = useState(false);
 
   const handleChange = (e) => {
     const searchTerm = e.target.value;
@@ -32,6 +33,7 @@ export default function Home() {
         user.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredUsers(filtered);
+    setShowList(true);
 
     const isEmailNotFound = !filtered.some((user) =>
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -89,7 +91,7 @@ export default function Home() {
                 *Email not found
               </p>
             )}
-            {inputData && filteredUsers.length > 0 && (
+            {inputData && filteredUsers.length > 0 && showList && (
               <ul className="absolute z-10 bg-white top-14 divide-y divide-custom-gray-2">
                 {filteredUsers.map((user, index) => (
                   <li
@@ -97,6 +99,8 @@ export default function Home() {
                     className="flex flex-col p-3 pr-20 hover:bg-custom-gray hover:cursor-pointer"
                     onClick={() => {
                       setInputData(user.email);
+                      setSelectedUser(user);
+                      setShowList(false);
                     }}
                   >
                     <p className="text-primary text-lg">{user.name}</p>
