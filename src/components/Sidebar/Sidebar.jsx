@@ -8,6 +8,7 @@ import { sidenav_items } from "../../constants/constants";
 // Components
 import CardSupport from "../CardSupport";
 import { setSelectedSidebar } from "../../store/SidebarSlice";
+import { Fragment } from "react";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -27,22 +28,38 @@ export default function Sidebar() {
       </button>
       <section className="flex flex-col justify-between h-full items-center mt-shorter2">
         <section className="flex flex-col gap-5">
-          {sidenav_items.map((item) => (
-            <button
-              key={item.id}
-              className={`flex items-center gap-5 animate ${
-                selectedSidebar === item.id
-                  ? "text-black"
-                  : "text-custom-gray-2"
-              }`}
-              onClick={() => {
-                dispatch(setSelectedSidebar(item.id));
-              }}
-            >
-              <Icon icon={item.icon} fontSize={40} />
-              <p className="">{item.label}</p>
-            </button>
-          ))}
+          {sidenav_items.map((item) => {
+            const selected = selectedSidebar === item.id;
+            return (
+              <Fragment key={item.id}>
+                <button
+                  className={`flex items-center gap-5 animate ${
+                    selected ? "text-black underline" : "text-custom-gray-2"
+                  }`}
+                  onClick={() => {
+                    dispatch(setSelectedSidebar(item.id));
+                  }}
+                >
+                  <Icon icon={item.icon} fontSize={40} />
+                  <p className="text-lg">{item.label}</p>
+                </button>
+                {selected && (
+                  <section className="border-l border-custom-gray-2 ml-5">
+                    {item.subItems.map((subItem, index) => {
+                      return (
+                        <p
+                          key={index}
+                          className="text-lg text-custom-gray-2 pl-5"
+                        >
+                          {subItem}
+                        </p>
+                      );
+                    })}
+                  </section>
+                )}
+              </Fragment>
+            );
+          })}
         </section>
         <CardSupport />
       </section>
