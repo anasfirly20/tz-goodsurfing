@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const sidebarSlice = createSlice({
   name: "sidebar",
   initialState: {
-    selectedSidebar: 2,
+    selectedSidebar: 1,
   },
   reducers: {
     setSelectedSidebar(state, action) {
