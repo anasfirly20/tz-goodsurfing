@@ -8,17 +8,31 @@ import CustomButton from "../../components/CustomButton";
 import CardLong from "../../components/CardLong";
 
 // React query
-import { useQuery } from "react-query";
+import { useQueryClient, useQuery, useMutation } from "react-query";
 
 // Api
-import { getAllUsers } from "../../api/routes/Users";
+import { getAllUsers, postUser, deleteUser } from "../../api/routes/Users";
+import { useEffect } from "react";
 
 export default function Home() {
+  const queryClient = useQueryClient();
+  const [users, setUsers] = useState([]);
+
   const { isLoading, error, data } = useQuery(["usersData"], () =>
     getAllUsers()
   );
 
   const [inputData, setInputData] = useState("");
+
+  const removeUser = useMutation((userId) => deleteUser(userId), {
+    onSuccess: (res, userId) => {
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+    },
+  });
+
+  useEffect(() => {
+    setUsers(data);
+  }, [data]);
 
   return (
     <section className="pl-[21vw] pt-longer pb-shorter3 pr-shorter space-y-10 min-h-screen">
@@ -35,6 +49,9 @@ export default function Home() {
             type="text"
             className="border-2 border-custom-gray-2 w-[77%] bg-white p-3 rounded-lg outline-none"
             value={inputData}
+            onChange={(e) => {
+              setInputData(e.target.value);
+            }}
           />
           <button
             type="button"
@@ -49,7 +66,7 @@ export default function Home() {
         </div>
       </form>
       <section className="grid grid-cols-3 gap-12">
-        {data?.map((user, index) => (
+        {users?.map((user, index) => (
           <CardLong
             key={index}
             role="Организатор"
@@ -58,7 +75,9 @@ export default function Home() {
             city={user?.address?.city}
             onClick={() => {
               setInputData(user?.email);
-              console.log(user?.email);
+            }}
+            onClickDelete={() => {
+              removeUser.mutate(user?.id);
             }}
           />
         ))}

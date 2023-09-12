@@ -1,14 +1,23 @@
 import { Icon } from "@iconify/react";
 import portrait2 from "../assets/portrait2.jpg";
 
-// eslint-disable-next-line react/prop-types
-export default function CardLong({ role, name, street, city, onClick }) {
+export default function CardLong({
+  role,
+  name,
+  street,
+  city,
+  onClick,
+  onClickDelete,
+}) {
   return (
     <section
       className="flex items-center gap-6 border border-custom-gray hover:border-custom-gray-2 animate rounded-sm bg-white p-4 relative group hover:cursor-pointer"
       onClick={onClick}
     >
-      <button className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 animate">
+      <button
+        className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 animate"
+        onClick={onClickDelete}
+      >
         <Icon
           icon="iconamoon:close-light"
           fontSize={30}
