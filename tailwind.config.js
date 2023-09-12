@@ -9,6 +9,7 @@ export default {
         "custom-black": "#0E1D27",
         "custom-light-blue": "#3dabf7",
         primary: "#212121",
+        secondary: "#8494A1",
       },
       padding: {
         shorter4: "1vw",

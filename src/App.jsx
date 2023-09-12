@@ -8,7 +8,9 @@ import { RingLoader } from "react-spinners";
 import Navbar from "./components/Navbar/Navbar";
 
 // Pages
-const Homepage = lazy(() => import("./pages/Homepage/Home"));
+const RegistrationPage = lazy(() =>
+  import("./pages/RegistrationPage/Registration")
+);
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
         >
           <Routes>
             <Route path="*" element={<Navigate to="/" />} />
-            <Route path="/" element={<Homepage />} />
+            <Route path="/" element={<RegistrationPage />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
