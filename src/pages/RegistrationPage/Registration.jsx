@@ -85,7 +85,9 @@ export default function Home() {
               onChange={handleChange}
             />
             {emailNotFound && (
-              <p className="text-sm text-red-500 mt-1 ml-1">*Email not found</p>
+              <p className="text-sm text-red-500 mt-1 ml-1 absolute -bottom-6">
+                *Email not found
+              </p>
             )}
             {inputData && filteredUsers.length > 0 && (
               <ul className="absolute z-10 bg-white top-14 divide-y divide-custom-gray-2">
@@ -107,12 +109,14 @@ export default function Home() {
           <button
             type="button"
             className={`flex justify-center items-center gap-2 p-3 border-2 rounded-lg w-[20%] animate ${
-              selectedUser
+              selectedUser && inputData
                 ? "bg-custom-light-blue text-white border-custom-light-blue"
                 : "bg-custom-gray cursor-not-allowed"
             }`}
             onClick={() => {
-              handleAddList(selectedUser);
+              if (inputData) {
+                handleAddList(selectedUser);
+              }
             }}
             disabled={selectedUser ? false : true}
           >
