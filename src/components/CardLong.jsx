@@ -9,7 +9,7 @@ export default function CardLong({ role, name, location }) {
         <Icon
           icon="iconamoon:close-light"
           fontSize={30}
-          className="text-custom-black"
+          className="text-custom-gray-2"
         />
       </button>
       <figure className="w-[60px] h-[60px] rounded-full overflow-hidden">

@@ -1,10 +1,13 @@
 // Miscellaneous
 import { Icon } from "@iconify/react";
+
+// Components
+import CustomButton from "../../components/CustomButton";
 import CardLong from "../../components/CardLong";
 
 export default function Home() {
   return (
-    <section className="pl-[21vw] pt-longer pr-shorter space-y-10">
+    <section className="pl-[21vw] pt-longer pr-shorter space-y-10 min-h-screen">
       <h1 className="text-primary text-2xl">Команда организации</h1>
       <p className="text-primary text-base">
         Владельцы команд могут добавлять участников в команду своей организации,
@@ -38,6 +41,12 @@ export default function Home() {
               location="Владивосток, Россия"
             />
           ))}
+      </section>
+      <section className="pt-10">
+        <CustomButton
+          label="Сохранить"
+          className="bg-custom-light-blue text-white py-3 px-28"
+        />
       </section>
     </section>
   );
