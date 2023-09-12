@@ -149,8 +149,14 @@ export default function Home() {
           label="Сохранить"
           className="bg-custom-light-blue text-white py-3 px-28"
           onClick={() => {
-            console.log("Saved List -->", list);
-            toast.success("Check your browser's console to check the list 🙂");
+            if (list.length > 0) {
+              console.log("Saved List -->", list);
+              toast.success(
+                "Check your browser's console to check the list 🙂"
+              );
+            } else {
+              toast.error("Select and Add some users to the check your list");
+            }
           }}
         />
       </section>
