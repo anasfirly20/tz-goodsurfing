@@ -1,5 +1,6 @@
 // Miscellaneous
 import { Icon } from "@iconify/react";
+import CardLong from "../../components/CardLong";
 
 export default function Home() {
   return (
@@ -26,6 +27,18 @@ export default function Home() {
           </button>
         </div>
       </form>
+      <section className="grid grid-cols-3 gap-12">
+        {Array(3)
+          .fill(3)
+          .map((_, index) => (
+            <CardLong
+              key={index}
+              role="Организатор"
+              name="Владислав Краснопольский"
+              location="Владивосток, Россия"
+            />
+          ))}
+      </section>
     </section>
   );
 }

@@ -5,3 +5,28 @@
 :root {
   background-color: #fbfcfe;
 }
+
+@layer components {
+  /* animation  */
+  .animate-button-shadow {
+    @apply hover:-translate-x-1 hover:-translate-y-1;
+  }
+  .animate-transform {
+    @apply transition-transform duration-300;
+  }
+  .animate-shorter {
+    @apply transition-all;
+  }
+  .animate {
+    @apply transition-all duration-300;
+  }
+  .animate-longer {
+    @apply transition-all duration-500;
+  }
+  .animate-longer2 {
+    @apply transition-all duration-700;
+  }
+  .animate-longer3 {
+    @apply transition-all duration-1000;
+  }
+}
