@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         "custom-gray": "#e0e6eb",
+        "custom-black": "#0E1D27",
       },
       padding: {
         shorter4: "1vw",

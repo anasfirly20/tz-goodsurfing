@@ -9,7 +9,6 @@ import Navbar from "./components/Navbar/Navbar";
 
 // Pages
 const Homepage = lazy(() => import("./pages/Homepage/Home"));
-const Aboutpage = lazy(() => import("./pages/Aboutpage/About"));
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
           <Routes>
             <Route path="*" element={<Navigate to="/" />} />
             <Route path="/" element={<Homepage />} />
-            <Route path="/about" element={<Aboutpage />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

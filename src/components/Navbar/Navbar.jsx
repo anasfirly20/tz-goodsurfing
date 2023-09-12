@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-shorter2 py-shorter4 border-b border-custom-gray">
+    <nav className="flex items-center justify-between px-shorter2 py-shorter4 border-b border-custom-gray bg-white">
       <figure>
         <img src={logo} alt="Brand's logo" />
       </figure>
@@ -22,13 +22,13 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <p className="">Владислав</p>
           <div className="bg-custom-gray rounded-full overflow-hidden w-10 h-10 flex justify-center items-center">
-            <Icon icon="mdi:user" fontSize={35} className="text-black" />
+            <Icon icon="mdi:user" fontSize={35} className="text-custom-black" />
           </div>
           <button type="button">
             <Icon
               icon="ep:arrow-down-bold"
-              fontSize={20}
-              className="text-black"
+              fontSize={18}
+              className="text-custom-black"
             />
           </button>
         </div>
